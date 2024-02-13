@@ -25,13 +25,13 @@ app.get("/create-new-post", (req, res) => {
   res.render("create-new-post.ejs", { currentDate: todaysDate });
 });
 
-// GET request made to "/create-new-post" path
+// GET request made to "/view-post" path
 app.get("/view-post", (req, res) => {
   const todaysDate = getDate.currentDate();
   res.render("view-post.ejs", { currentDate: todaysDate });
 });
 
-
+// POST request made to "/create-new-post" path
 app.post("/create-new-post", (req, res) => {
 
   let data = {
@@ -43,7 +43,7 @@ app.post("/create-new-post", (req, res) => {
   console.log(req.body);
   blogList.push(data);
   console.log(blogList);
-  res.render("index.ejs", {newPost: data}); 
+  res.render("index.ejs", {newPost: data, allPosts: blogList}); 
 });
 
 app.listen(port, () => {

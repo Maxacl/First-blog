@@ -40,13 +40,14 @@
 
   <div class="post">
     <% if (locals.newPost) { %>
-      <h2>Blog Number: <%= newPost.blogNumber %></h2>
-      <h2>Title: <%= newPost.blogTitle %></h2>
-      <h2>Body:</h2> <p><%= newPost.blogBody %></p>
-    <% } else { %>
-      <% console.log("No post data submitted"); %>
-      <%- "No post data submitted" %>
-    <% } %>
+      <% allPosts.forEach(post => { %>
+        <div class="post">
+          <h2>Blog Number: <%= post.blogNumber %></h2>
+          <h2>Title: <%= post.blogTitle %></h2>
+          <h2>Body:</h2> <p><%= post.blogBody %></p>
+        </div>
+      <% }) %>
+    <% }; %>
 
       <!-- list of created posts-->
     <div class="created-posts">
