@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/main.css">
+  <title>Create Your Post</title>
+</head>
+
+<body>
+
+  <%- include("nav-bar.ejs") %>
+
+  <header>
+    <h1>Create New Blog Post!</h1>
+    <p>Published on <%= locals.currentDate %></p>
+
+  </header>
+
+  <div class="post">
+    <% if (locals.theBody) { %>
+      <h2>Title: <% locals.theTitle %></h2>
+      <h2>Body:</h2> <p><% locals.theBody %></p>
+    <% } else { %>
+      <% console.log("Error MEssage"); %>
+      <% "Error Message" %>
+    <% } %>
+
+</body>

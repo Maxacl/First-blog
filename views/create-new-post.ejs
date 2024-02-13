@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/main.css">
+  <title>Create Your Post</title>
+</head>
+
+<body>
+
+  <%- include("nav-bar.ejs") %>
+
+  <header>
+    <h1>Create New Blog Post!</h1>
+    <p>Published on <%= locals.currentDate %></p>
+
+  </header>
+
+    <form action="/create-new-post" method="POST">
+      <label>Blog Post Title:</label>
+      <textarea name="blogTitle" rows="1" cols="5"></textarea>
+      
+      <label>Blog Post:</label>
+      <textarea name="blogBody" rows="10" cols="50"></textarea>
+      <input type="submit" value="Submit New Blog Post">
+
+    </form>
+
+</body>
+</html>

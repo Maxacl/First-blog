@@ -1,0 +1,5 @@
+Click "Create Post", "Edit Post" or "Delete Post" buttons in order to create, edit or delete a Post
+if you click "Create Post", it take you to the "/create-post" end point where you provide a "Blog Title" and the accompanying "Blog Post Text"
+You then click the "Submit" button
+The submit button redirects you to the index.ejs page, which now shows the title of the new blog post and is linked to another .ejs page that displays the full post
+on this new page, you can edit/delete
