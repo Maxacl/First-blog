@@ -8,6 +8,7 @@ const app = express();
 const port = 3000;
 
 let blogList = [];
+let data;
 
 app.set('view engine', 'ejs');
 
@@ -28,7 +29,7 @@ app.get("/create-new-post", (req, res) => {
 // POST request made to "/create-new-post" path
 app.post("/create-new-post", (req, res) => {
 
-  let data = {
+  data = {
     blogNumber:  blogList.length + 1,
     blogTitle: req.body.blogTitle,
     blogBody: req.body.blogBody
@@ -52,10 +53,23 @@ app.get("/view-post", (req, res) => {
 app.get("/edit-post", (req, res) => {
   console.log("GET request made to '/edit-post' endpoint");
   const todaysDate = getDate.currentDate();
-  res.render("edit-post.ejs");
+  console.log(req.body);
+  res.render("edit-post.ejs", { currentDate: todaysDate, newPost: data, allPosts: blogList });
 });
 
-/* { currentDate: todaysDate }, { newPost: data }, { allPosts: blogList } */
+app.post("/edit-post", (req, res) => {
+  data = {
+    blogNumber:  blogList.length + 1,
+    blogTitle: req.body.blogTitle,
+    blogBody: req.body.blogBody
+  };
+  
+  console.log(req.body);
+  blogList.push(data);
+  console.log(`This is a list of my created blog posts: ${blogList}`);
+  res.render("index.ejs", {newPost: data, allPosts: blogList}); 
+});
+
 
 
 app.listen(port, () => {

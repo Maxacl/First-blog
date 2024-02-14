@@ -42,8 +42,7 @@
     <% if (locals.newPost) { %>
       <% allPosts.forEach(post => { %>
         <div class="post">
-          <h2>Blog Number: <%= post.blogNumber %></h2>
-          <a href="/edit-posts"><h2>Title: <%= post.blogTitle %></h2></a>
+          <h2> <%= post.blogNumber %>)</h2><a href="/edit-post"> <p><%= post.blogTitle %></p></a>
           <h2>Body:</h2> <p><%= post.blogBody %></p>
         </div>
       <% }) %>

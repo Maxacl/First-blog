@@ -15,9 +15,37 @@
   <%- include("nav-bar.ejs") %>
 
   <header>
-    <h1>Create New Blog Post!</h1>
+    <h1>Edit Your Previous Post</h1>
+    <p>Published on <%= locals.currentDate %></p>
+
   </header>
+
+
+  <form action="/edit-post" method="POST">
+    <label>Blog Post Title:</label>
+    <textarea name="blogTitle" rows="1" cols="5">
+      <p><%- newPost.blogBody %></p>
+    </textarea>
+    
+    <label>Blog Post:</label>
+    <textarea name="blogBody" rows="10" cols="50"></textarea>
+    <input type="submit" value="Edit Post">
+
+  </form>
+
+
+  <!-- Add buttons to delete/edit post-->
+  <div class="post">
+    <% if (locals.newPost) { %>
+      <h2>Title: <% locals.theTitle %></h2>
+      <h2>Body:</h2> <p><% locals.theBody %></p>
+    <% } else { %>
+      <% console.log("Error MEssage"); %>
+      <% "Error Message" %>
+    <% } %>
+  </div>
 
 </body>
 
 </html>
+
