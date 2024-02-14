@@ -43,7 +43,7 @@
       <% allPosts.forEach(post => { %>
         <div class="post">
           <h2>Blog Number: <%= post.blogNumber %></h2>
-          <h2>Title: <%= post.blogTitle %></h2>
+          <a href="/edit-posts"><h2>Title: <%= post.blogTitle %></h2></a>
           <h2>Body:</h2> <p><%= post.blogBody %></p>
         </div>
       <% }) %>
@@ -52,7 +52,7 @@
       <!-- list of created posts-->
     <div class="created-posts">
       <div class="post">
-        <!-- make this a link with the "/view-post" endpoint -->
+        <!-- make this a link with the "/view-post" endpoint. Allowing the user to view the post in its entirety -->
         <h2><%- locals.blogTitle %></h2>
         <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         <a href="post2.html">Read more...</a>

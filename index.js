@@ -25,12 +25,6 @@ app.get("/create-new-post", (req, res) => {
   res.render("create-new-post.ejs", { currentDate: todaysDate });
 });
 
-// GET request made to "/view-post" path
-app.get("/view-post", (req, res) => {
-  const todaysDate = getDate.currentDate();
-  res.render("view-post.ejs", { currentDate: todaysDate });
-});
-
 // POST request made to "/create-new-post" path
 app.post("/create-new-post", (req, res) => {
 
@@ -42,9 +36,27 @@ app.post("/create-new-post", (req, res) => {
   
   console.log(req.body);
   blogList.push(data);
-  console.log(blogList);
+  console.log(`This is a list of my created blog posts: ${blogList}`);
   res.render("index.ejs", {newPost: data, allPosts: blogList}); 
 });
+
+
+// GET request made to "/view-post" path
+app.get("/view-post", (req, res) => {
+  const todaysDate = getDate.currentDate();
+  res.render("view-post.ejs", { currentDate: todaysDate });
+});
+
+
+// GET request made to "/edit-post" path
+app.get("/edit-post", (req, res) => {
+  console.log("GET request made to '/edit-post' endpoint");
+  const todaysDate = getDate.currentDate();
+  res.render("edit-post.ejs");
+});
+
+/* { currentDate: todaysDate }, { newPost: data }, { allPosts: blogList } */
+
 
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
