@@ -28,7 +28,9 @@
     </textarea>
     
     <label>Blog Post:</label>
-    <textarea name="blogBody" rows="10" cols="50"></textarea>
+    <textarea name="blogBody" rows="10" cols="50">
+      <p><%- locals.newPost.blogBody %></p>
+    </textarea>
     <input type="submit" value="Edit Post">
 
   </form>
@@ -38,7 +40,7 @@
   <div class="post">
     <% if (locals.newPost) { %>
       <h2>Title: <% locals.theTitle %></h2>
-      <h2>Body:</h2> <p><% locals.theBody %></p>
+      <h2>Body:</h2><%- locals.newPost.blogBody %>
     <% } else { %>
       <% console.log("Error MEssage"); %>
       <% "Error Message" %>
