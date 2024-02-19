@@ -42,12 +42,22 @@
     <% if (locals.newPost) { %>
       <% allPosts.forEach(post => { %>
         <div class="post">
-          <h2> <%= post.blogNumber %>)</h2><a href="/edit-post"> <p><%= post.blogTitle %></p></a>
+          <h2> <%= post.blogNumber %>)</h2><a href="/edit-post"> <p><%= post.blogNumber %>) <%= post.blogTitle %></p></a>
           <h2>Body:</h2> <p><%= post.blogBody %></p>
         </div>
       <% }) %>
-    <% }; %>
+    <% } else { %>
+      <%= console.log("Error occurred, no no 'locals.newPost' exists") %>
+      <% } %>
 
+    <% if (locals.updatedPost) { %>
+      <div class="post">
+        <h2> <%= updatedPost.blogNumber %>)</h2><a href="/edit-post"> <p><%= updatedPost.blogNumber %>) <%= updatedPost.editedPostTitle %></p></a>
+        <h2>Body:</h2> <p><%= updatedPost.editedPostBody %></p>
+      </div>
+    <% } else { %>
+      <%= console.log("Error occurred, no 'locals.updatePost' exists") %>
+      <% } %>
       <!-- list of created posts-->
     <div class="created-posts">
       <div class="post">

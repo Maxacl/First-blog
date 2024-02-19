@@ -8,7 +8,8 @@ const app = express();
 const port = 3000;
 
 let blogList = [];
-let data;
+let postData;
+let updatePostData;
 
 app.set('view engine', 'ejs');
 
@@ -29,45 +30,49 @@ app.get("/create-new-post", (req, res) => {
 // POST request made to "/create-new-post" path
 app.post("/create-new-post", (req, res) => {
 
-  data = {
+  postData = {
     blogNumber:  blogList.length + 1,
     blogTitle: req.body.blogTitle,
     blogBody: req.body.blogBody
   };
   
-  console.log(req.body);
-  blogList.push(data);
+  blogList.push(postData);
+  console.log(`This is  the request body (req.body) object: ${JSON.stringify(req.body)}`);
+  console.log(`This is  the response body (res.body) object: ${res.body}`);
+
   console.log(`This is a list of my created blog posts: ${blogList}`);
-  res.render("index.ejs", {newPost: data, allPosts: blogList}); 
+  res.render("index.ejs", {newPost: postData, allPosts: blogList});  // must access these values on the client-side by using "newPost" and "allPost" values first
+
+  console.log(`This is  the response body (res.body) object: ${JSON.stringify(postData)}`);
+
 });
-
-
-// GET request made to "/view-post" path
-app.get("/view-post", (req, res) => {
-  const todaysDate = getDate.currentDate();
-  res.render("view-post.ejs", { currentDate: todaysDate });
-});
-
 
 // GET request made to "/edit-post" path
 app.get("/edit-post", (req, res) => {
-  console.log("GET request made to '/edit-post' endpoint");
   const todaysDate = getDate.currentDate();
-  console.log(req.body);
-  res.render("edit-post.ejs", { currentDate: todaysDate, newPost: data, allPosts: blogList });
+  res.render("edit-post.ejs", {currentDate: todaysDate});
 });
 
 app.post("/edit-post", (req, res) => {
-  data = {
-    blogNumber:  blogList.length + 1,
-    blogTitle: req.body.blogTitle,
-    blogBody: req.body.blogBody
+  console.log(req.body);
+
+  updatePostData = {
+    updatedBlogNumber:  blogList.length + 1,
+    editedPostTitle: req.body.editedBlogTitle,
+    editedPostBody: req.body.editedBlogBody
   };
   
-  console.log(req.body);
-  blogList.push(data);
+  console.log(`${JSON.stringify(req.body)}`);
+  blogList.push(postData);
+
   console.log(`This is a list of my created blog posts: ${blogList}`);
-  res.render("index.ejs", {newPost: data, allPosts: blogList}); 
+  res.render("index.ejs", { updatedPost: updatePostData, allPosts: blogList}); 
+
+  console.log(`${JSON.stringify(updatePostData)}`);
+  console.log(`${JSON.stringify(blogList)}`);
+
+
+
 });
 
 

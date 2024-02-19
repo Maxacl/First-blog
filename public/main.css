@@ -26,6 +26,25 @@ h1 {
 /*Blog buttons */
 #blog-buttons {
   padding: 20px;
+  margin-top: 50px;
+}
+
+label {
+  margin: 25px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+/*edit-post textarea*/
+#post-title {
+  width: 300px;
+  margin-top: 25px;
+}
+
+/*edit-post textarea*/
+#post-body {
+  width: 500px;
+  height: 500px;
 }
 
 /*Nav Bar */
