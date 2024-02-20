@@ -23,28 +23,39 @@
   <form action="/edit-post" method="POST">
     <div>
       <label for="post-title-label">Edit Post Title:</label>
-      <textarea name="editedBlogTitle" rows="1" cols="5">
+      <textarea name="editedBlogTitle" rows="2" cols="20"><%= newPost.blogTitle %>
       </textarea>
     </div>
     
     <div>
       <label for="post-body-label">Edit Blog Text:</label>
-      <textarea name="editedBlogBody" rows="10" cols="50">
+      <textarea name="editedBlogBody" rows="10" cols="50"><%= newPost.blogBody %>
       </textarea>
       <input type="submit" value="Edit Post">
     </div>
   </form>
 
-  <!-- Add buttons to delete/edit post-->
-  <div class="edit-post">
+  <div class="post">
     <% if (locals.newPost) { %>
-      <h2>Title: <% locals.theTitle %></h2>
-      <h2>Body:</h2><%- locals.newPost.blogBody %>
+      <% allPosts.forEach(post => { %>
+        <div class="post">
+          <a href="/edit-post"> <%= post.blogNumber %>) <%= post.blogTitle %></a>
+        </div>
+      <% }) %>
     <% } else { %>
-      <% console.log("Error MEssage"); %>
-      <% "Error Message" %>
-    <% } %>
-  </div>
+      <%= console.log("Error occurred, no no 'locals.newPost' exists") %>
+      <% } %>
+
+    <% if (locals.updatedPost) { %>
+      <% allPosts.forEach(post => { %>
+        <div class="post">
+          <h2> <%= updatedPost.blogNumber %>)</h2><a href="/edit-post"> <p><%= updatedPost.blogNumber %>) <%= updatedPost.editedPostTitle %></p></a>
+          <h2>Body:</h2> <p><%= updatedPost.editedPostBody %></p>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <%= console.log("Error occurred, no 'locals.updatePost' exists") %>
+      <% } %>
 
 </body>
 

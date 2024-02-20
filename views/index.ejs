@@ -42,8 +42,7 @@
     <% if (locals.newPost) { %>
       <% allPosts.forEach(post => { %>
         <div class="post">
-          <h2> <%= post.blogNumber %>)</h2><a href="/edit-post"> <p><%= post.blogNumber %>) <%= post.blogTitle %></p></a>
-          <h2>Body:</h2> <p><%= post.blogBody %></p>
+          <a href="/edit-post"> <%= post.blogNumber %>) <%= post.blogTitle %></a>
         </div>
       <% }) %>
     <% } else { %>
@@ -51,21 +50,16 @@
       <% } %>
 
     <% if (locals.updatedPost) { %>
-      <div class="post">
-        <h2> <%= updatedPost.blogNumber %>)</h2><a href="/edit-post"> <p><%= updatedPost.blogNumber %>) <%= updatedPost.editedPostTitle %></p></a>
-        <h2>Body:</h2> <p><%= updatedPost.editedPostBody %></p>
-      </div>
+      <% allPosts.forEach(post => { %>
+        <div class="post">
+          <h2> <%= updatedPost.blogNumber %>)</h2><a href="/edit-post"> <p><%= updatedPost.blogNumber %>) <%= updatedPost.editedPostTitle %></p></a>
+          <h2>Body:</h2> <p><%= updatedPost.editedPostBody %></p>
+        </div>
+      <% }) %>
     <% } else { %>
       <%= console.log("Error occurred, no 'locals.updatePost' exists") %>
       <% } %>
-      <!-- list of created posts-->
-    <div class="created-posts">
-      <div class="post">
-        <!-- make this a link with the "/view-post" endpoint. Allowing the user to view the post in its entirety -->
-        <h2><%- locals.blogTitle %></h2>
-        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <a href="post2.html">Read more...</a>
-      </div>
+
 
     </div>
   </div>

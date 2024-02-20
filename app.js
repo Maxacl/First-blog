@@ -29,7 +29,6 @@ app.get("/create-new-post", (req, res) => {
 
 // POST request made to "/create-new-post" path
 app.post("/create-new-post", (req, res) => {
-
   postData = {
     blogNumber:  blogList.length + 1,
     blogTitle: req.body.blogTitle,
@@ -48,14 +47,16 @@ app.post("/create-new-post", (req, res) => {
 });
 
 // GET request made to "/edit-post" path
+// We use the "postData" global variable that was populated once the original "newPost" was made with the create-post-endpoint. Remember, "postData" is
+// global and can be shared with different route handlers. The same is true for "allPosts".
+// 
+// This makes it so once we render the edit-post.ejs file to the browser, the origianl posts (newPost) will be rendered as well in the textarea for the user
 app.get("/edit-post", (req, res) => {
   const todaysDate = getDate.currentDate();
-  res.render("edit-post.ejs", {currentDate: todaysDate});
+  res.render("edit-post.ejs", {newPost: postData, allPosts: blogList});
 });
 
 app.post("/edit-post", (req, res) => {
-  console.log(req.body);
-
   updatePostData = {
     updatedBlogNumber:  blogList.length + 1,
     editedPostTitle: req.body.editedBlogTitle,
@@ -63,7 +64,7 @@ app.post("/edit-post", (req, res) => {
   };
   
   console.log(`${JSON.stringify(req.body)}`);
-  blogList.push(postData);
+  blogList.push(updatePostData);
 
   console.log(`This is a list of my created blog posts: ${blogList}`);
   res.render("index.ejs", { updatedPost: updatePostData, allPosts: blogList}); 
