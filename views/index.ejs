@@ -7,19 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Blog Website</title>
   <link rel="stylesheet" type="text/css" href="/main.css">
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
 
 <body>
-
 <%- include("nav-bar.ejs") %>
-
 <div>
-
   <h1>Welcome to My Blog!</h1>
-
   <div class="d-flex align-items-center" id="blog-buttons">
     <!-- Create New Post button -->
     <form action="/create-new-post" method="GET">
@@ -37,6 +32,8 @@
     </form>
   </div>
 
+<!-- If the newPost variable exists (the post is an original blog post and not an edited one), then for each blog post
+inside of "allPosts" local variable (the global variable in the server side code), create a <div> element-->
 
   <div class="post">
     <% if (locals.newPost) { %>
@@ -45,21 +42,16 @@
           <a href="/edit-post"> <%= post.blogNumber %>) <%= post.blogTitle %></a>
         </div>
       <% }) %>
-    <% } else { %>
-      <%= console.log("Error occurred, no no 'locals.newPost' exists") %>
-      <% } %>
-
-    <% if (locals.updatedPost) { %>
+    <% } else if (locals.editedPost) { %>
       <% allPosts.forEach(post => { %>
         <div class="post">
-          <h2> <%= updatedPost.blogNumber %>)</h2><a href="/edit-post"> <p><%= updatedPost.blogNumber %>) <%= updatedPost.editedPostTitle %></p></a>
-          <h2>Body:</h2> <p><%= updatedPost.editedPostBody %></p>
+          <h2> <%= post.blogNumber %>)</h2><a href="/edit-post"> <p><%= post.blogNumber %>) <%= post.editedPostTitle %></p></a>
+          <h2>Body:</h2> <p><%= post.editedPostBody %></p>
         </div>
       <% }) %>
-    <% } else { %>
-      <%= console.log("Error occurred, no 'locals.updatePost' exists") %>
+      <% } else { %>
+        <%= console.log("No newPost or editedPost's exist") %>
       <% } %>
-
 
     </div>
   </div>
