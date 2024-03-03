@@ -50,7 +50,7 @@ app.post("/create-new-post", (req, res) => {
 
   console.log(`POST sent to "/create-new-post". blogList: ${JSON.stringify(blogList)}`);
   //FIXME: Possibly redirect to "/"
-  res.render("index.ejs", {newPost: postData, allPosts: blogList});  // must access these values on the client-side by using "newPost" and "allPost" values first
+  res.render("index.ejs", {newPost: postData, blogList: blogList});  // must access these values on the client-side by using "newPost" and "allPost" values first
 });
 
 
@@ -62,10 +62,10 @@ app.post("/create-new-post", (req, res) => {
 // This makes it so once we render the edit-post.ejs file to the browser, the origianl posts (newPost) will be rendered as well in the textarea for the user
 app.get("/edit-post", (req, res) => {
   const todaysDate = getDate.currentDate();
-  console.log(`GET sent to "/edit-post". 'req.body':${JSON.stringify(req.body)}`);
-  res.render("edit-post.ejs", {newPost: postData, allPosts: blogList});
+  res.render("edit-post.ejs", {newPost: postData, blogList: blogList});
 });
 
+//once the edit has been made and res.render() renders index.ejs, no post data is showing
 app.post("/edit-post", (req, res) => {
   console.log(`POST sent to '/edit-post'. 'req.body':${JSON.stringify(req.body)}`);
   
@@ -77,7 +77,8 @@ app.post("/edit-post", (req, res) => {
   blogList.push(editedPost);
 
   let indexToRemove = blogList.findIndex(obj => obj.blogNumber === editedPost.editedPostNumber);
-
+  console.log(`This is the "indexToRemove": ${indexToRemove}`);
+  console.log(`This is the "blogList": ${blogList}`);
   if (indexToRemove !== -1) {
     blogList.splice(indexToRemove, 1);
   };
@@ -85,7 +86,7 @@ app.post("/edit-post", (req, res) => {
 
   console.log(blogList);
   console.log(`POST sent to "/edit-post". This is the "blogList"${JSON.stringify((blogList))}`);
-  res.render("index.ejs", { editedPost: editedPost, allPosts: blogList}); 
+  res.render("index.ejs", { editedPost: editedPost, blogList: blogList}); 
 
 
 

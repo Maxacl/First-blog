@@ -36,22 +36,22 @@
 inside of "allPosts" local variable (the global variable in the server side code), create a <div> element-->
 
   <div class="post">
-    <% if (locals.newPost) { %>
-      <% allPosts.forEach(post => { %>
+
+    <% blogList.forEach(post => { %>
+      <% if (post.blogTitle) { %>
         <div class="post">
-          <a href="/edit-post"> <%= post.blogNumber %>) <%= post.blogTitle %></a>
+          <a href="/edit-post"><%= post.blogNumber %>) <%= post.blogTitle %></a>
         </div>
-      <% }) %>
-    <% } else if (locals.editedPost) { %>
-      <% allPosts.forEach(post => { %>
-        <div class="post">
-          <h2> <%= post.blogNumber %>)</h2><a href="/edit-post"> <p><%= post.blogNumber %>) <%= post.editedPostTitle %></p></a>
-          <h2>Body:</h2> <p><%= post.editedPostBody %></p>
-        </div>
-      <% }) %>
+        <% if (post.editedPostBody) { %>
+          <div class="post">
+            <a href="/edit-post"><%= editedPost.editedPostNumber %>) <%= editedPost.editedPostBody %></a>
+          </div>
+        <% } %>
       <% } else { %>
         <%= console.log("No newPost or editedPost's exist") %>
       <% } %>
+    <% }) %>
+    
 
     </div>
   </div>

@@ -20,13 +20,13 @@
 
   </header>
   <div>
+  <% if (newPost) { %>
   <form action="/edit-post" method="POST">
     <div>
       <label for="post-title-label">Edit Post Title:</label>
       <textarea name="editedBlogTitle" rows="2" cols="20"><%= newPost.blogTitle %>
       </textarea>
     </div>
-    
     <div>
       <label for="post-body-label">Edit Blog Text:</label>
       <textarea name="editedBlogBody" rows="10" cols="50"><%= newPost.blogBody %>
@@ -34,29 +34,21 @@
       <input type="submit" value="Edit Post">
     </div>
   </form>
-
-  <div class="post">
-    <% if (locals.updatedPost) { %>
-      <% allPosts.forEach(post => { %>
-        <div class="post">
-          <a href="/edit-post"> <%= post.blogNumber %>) <%= post.blogTitle %></a>
-        </div>
-      <% }) %>
-    <% } else { %>
-      <% console.log("Error occurred, no no 'locals.newPost' exists"); %>
-      <% } %>
-
-    <% if (locals.postData) { %>
-      <% allPosts.forEach(post => { %>
-        <div class="post">
-          <p> Post Number: <%= postData.blogNumber %> </p><a href="/edit-post"> <p><%= postData.blogNumber %>) <%= postData.blogTitle %></p></a>
-          <p>Body:</p> <p><%= postData.blogBody %></p>
-        </div>
-      <% }) %>
-    <% } else if (locals.editedPost) { %>
-      <% } %>
-
+  <% } else { %>
+    <form action="/edit-post" method="POST">
+      <div>
+        <label for="post-title-label">Edit Post Title:</label>
+        <textarea name="editedBlogTitle" rows="2" cols="20"><%= editedPost.editedBlogTitle %>
+        </textarea>
+      </div>
+      <div>
+        <label for="post-body-label">Edit Blog Text:</label>
+        <textarea name="editedBlogBody" rows="10" cols="50"><%= editedPost.editedPostBody %>
+        </textarea>
+        <input type="submit" value="Edit Post">
+      </div>
+    </form>
 </body>
-
+<% } %>
 </html>
 
